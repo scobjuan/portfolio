@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { SECTIONS } from '@/router/routes'
 import { activeSection } from '@/composables/useSectionTheme'
@@ -14,11 +14,32 @@ const isActive = (id: string) =>
 const toggle = ref<HTMLButtonElement | null>(null)
 const navSections = SECTIONS.filter((section) => section.id !== 'home')
 
-onMounted(() => menu.registerTrigger(toggle.value))
+// Hide while scrolling down so it never covers content; show again on any upward scroll.
+const hidden = ref(false)
+let lastY = 0
+
+function onScroll() {
+  const y = window.scrollY
+  const delta = y - lastY
+  if (Math.abs(delta) < 6) return
+  hidden.value = y > 160 && delta > 0 && !menu.state.open
+  lastY = y
+}
+
+onMounted(() => {
+  menu.registerTrigger(toggle.value)
+  lastY = window.scrollY
+  window.addEventListener('scroll', onScroll, { passive: true })
+})
+onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
+watch(
+  () => route.fullPath,
+  () => (hidden.value = false),
+)
 </script>
 
 <template>
-  <header class="header" :class="{ 'is-menu-open': menu.state.open }">
+  <header class="header" :class="{ 'is-menu-open': menu.state.open, 'is-hidden': hidden }">
     <RouterLink class="header__logo" to="/">
       JE<span class="header__dot">.</span><span class="sr-only"> Juan Escobar, ir al inicio</span>
     </RouterLink>
@@ -88,7 +109,13 @@ onMounted(() => menu.registerTrigger(toggle.value))
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--fg);
-  transition: color var(--dur-base) var(--ease-out);
+  transition:
+    color var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out);
+}
+
+.header.is-hidden:not(:focus-within) {
+  transform: translateY(-110%);
 }
 
 .header.is-menu-open {
