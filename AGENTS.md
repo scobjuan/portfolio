@@ -81,7 +81,7 @@ Visual reference: `docs/design/` (static HTML mockups of every section, the mobi
 - [x] Phase 0 - Setup: scaffold, dependencies, tokens, hooks, documentation (v0.1.0).
 - [x] Phase 1 - Foundation (v0.2.0): fonts, layout, `AppHeader`, `MobileMenu`, `AppCursor`, `AppLoader`, Lenis, grain, `useSectionTheme`, `useSectionRoute`.
 - [x] Phase 2 - Home sections (static + GSAP) (v0.3.0): hero, projects, about, skills (static version), experience, contact.
-- [ ] Phase 3 - Project routes: `/archivo`, `/proyectos/:slug` and the "Recompile" transition.
+- [x] Phase 3 - Project routes (v0.4.0): `/archivo`, `/proyectos/:slug` and the "Recompile" transition.
 - [ ] Phase 4 - Polish: mobile, accessibility, performance, prerender, meta/OG, sitemap, E2E and axe passing.
 - [ ] Phase 5 - Heavy effects: matter.js physics in Skills and OGL WebGL distortion on the project preview, lazy loaded and disabled on touch or with reduced motion.
 - [ ] Phase 6 - Deployment, CI/CD and real content:
@@ -92,17 +92,21 @@ Visual reference: `docs/design/` (static HTML mockups of every section, the mobi
 
 ## Current status
 
-- Phase in progress: Phase 2 is closed (v0.3.0). The next one is Phase 3.
-- Done in Phase 2: the six sections under `src/components/sections/` (hero with letter reveal and pointer-proximity width plus lime orb, projects with filters, FLIP list and floating preview, about with scroll-scrubbed words and count-up figures, skills as a static pile with category highlight, experience with a sticky digit-reel year and accordion, contact with scroll-stretched heading, magnetic button and copy-to-clipboard email), typed placeholder content in `src/content/`, `useMotion` and text effects, and a stub `ProjectView` at `/proyectos/:slug` (prerendered through `ssgOptions.includedRoutes` in `vite.config.ts`).
-- Next step: Phase 3 - `ArchiveView` at `/archivo` with filters, a real `ProjectView` case study layout, and the "Recompile" page transition between views (see `docs/design/animation-notes.md`). Then add a "Ver archivo completo" link in `ProjectsSection`.
-- Known gaps, by design: the Contact curtain-from-below entrance is not built (the body theme crossfade stands in for it); the About section has no CV link; Skills physics (drag and throw) is Phase 5; mobile layouts are functional but get their full pass in Phase 4.
+- Phase in progress: Phase 3 is closed (v0.4.0). The next one is Phase 4 (polish).
+- Done in Phase 3: `/archivo` (`ArchiveView`, all 8 placeholder projects with filters), a full case study page (`ProjectView`: cover with parallax, challenge/solution, gallery, results, next project), shared `ProjectList` and `ProjectFilters`, and the "Recompile" page transition (`usePageTransition`, `PageTransition.vue`, wired in `App.vue`). The home shows only `featured` projects and links to the archive.
+- Next step: Phase 4 - mobile pass against the 390x844 mockups (menu, projects, every section), accessibility review (skip link, focus order, header overlapping content while scrolling), performance (AVIF images, code splitting, font subsets), meta/OG tags, `sitemap.xml`, `robots.txt`.
+- Known gaps, by design: the Contact curtain-from-below entrance is not built (the body theme crossfade stands in for it); the About section has no CV link; Skills physics (drag and throw) is Phase 5; project and portrait images are placeholders (`ProjectVisual`, striped blocks).
 - Things to know:
   - Components must stay SSR-safe (`vite-ssg` prerenders): touch `window`/`document` only in `onMounted` or inside `useMotion` setups.
   - Use `useMotion(scopeRef, setup)` for every GSAP animation. It scopes selectors, reverts on unmount and exposes `motion` (reduced-motion off) and `fine` (mouse pointer). Return early when `motion` is false so the static layout is untouched.
+  - Page entrance animations must wait for `onPageReady(callback)` (`usePageTransition.ts`): it fires once the loader is gone and the transition curtain is lifting. Create ScrollTriggers inside it with `ctx.add(...)` so they are still reverted on unmount.
+  - Page transition: `getViewKey(route)` (`src/router/meta.ts`) decides when it runs; all home sections share the key `home`, so moving between them only scrolls. New non-section routes need `meta.theme` (and `meta.parentSection` to highlight the header link) and must call `usePageTheme(...)`.
+  - Reveal content with `opacity`, never `autoAlpha`/`visibility: hidden`: hidden content leaves the accessibility tree and keyboard focus until scrolled. `autoAlpha` is fine only for decorative, `aria-hidden` elements (orb, preview, curtain).
+  - Lenis caches the page size: call `lenis.resize()` before scrolling to something after a view change (`scrollToElement` already does).
   - `SplitText`: pass `aria: 'none'` and label the heading yourself (axe rejects `aria-label` on spans and paragraphs). Avoid `autoSplit` when the animation must not restart on resize.
   - In scoped styles, a global selector with a descendant must be wrapped whole: `:global(html.js .hero__title)`. Writing `:global(html.js) .hero__title` compiles to `html.js` alone and hides the page.
-  - `lockScroll()`/`unlockScroll()` are counted; always pair them (loader and menu use them).
+  - `lockScroll()`/`unlockScroll()` are counted; always pair them (loader, menu and page transition use them).
   - Section ids in the DOM equal the ids in `SECTIONS`; do not rename one without the other.
   - E2E: run `pnpm exec playwright install chromium` once. Tests set `portfolio:loader-seen` to skip the loader. The axe test runs with reduced motion because the About text is intentionally dimmed until scrolled, and the Vue DevTools overlay is excluded because it only exists in dev.
-  - Check visual work with screenshots (`page.screenshot`) at 1200x675 and 390x844 against `docs/design/`; unit and E2E tests alone missed layout bugs in this phase.
+  - Check visual work with screenshots (`page.screenshot`) at 1200x675 and 390x844 against `docs/design/`; unit and E2E tests alone miss layout bugs.
 - Open questions: real content (projects, experience, photos, email) and the domain.
