@@ -18,7 +18,7 @@ export default defineConfig({
   },
   projects: [
     { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
-    { name: 'mobile', use: { ...devices['Pixel 7'] }, testIgnore: /nav\.spec\.ts/ },
+    { name: 'mobile', use: { ...devices['Pixel 7'] }, testIgnore: /(nav|header)\.spec\.ts/ },
   ],
   webServer: {
     // CI tests the production build; locally the dev server is faster.
