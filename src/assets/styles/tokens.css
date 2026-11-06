@@ -33,4 +33,11 @@
   /* Radii */
   --radius-card: 6px;
   --radius-pill: 999px;
+
+  /* Layers */
+  --z-grain: 50;
+  --z-menu: 60;
+  --z-header: 70;
+  --z-loader: 90;
+  --z-cursor: 100;
 }

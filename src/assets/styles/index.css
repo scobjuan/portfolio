@@ -1,6 +1,7 @@
 @import '@fontsource-variable/archivo/wdth.css';
 @import '@fontsource-variable/inter';
 @import '@fontsource-variable/jetbrains-mono';
+@import 'lenis/dist/lenis.css';
 @import './reset.css';
 @import './tokens.css';
 @import './base.css';
