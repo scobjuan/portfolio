@@ -42,7 +42,7 @@ Visual reference: `docs/design/` (static HTML mockups of every section, the mobi
 ## Code conventions
 
 - Components in `PascalCase`, composables named `useXxx` in `src/composables/`, typed content in `src/content/`.
-- Placeholder data is written in square brackets (for example `[Company]`) until real content exists.
+- All content lives in `src/content/` as typed data. It is fictional placeholder data (made-up companies, `example.com` addresses) until real content replaces it; never hardcode copy in components that belongs to the content files.
 - CSS uses only variables from `tokens.css`; no loose colors or easing curves.
 - Every animation respects `prefers-reduced-motion` and is cleaned up on unmount (`gsap.context().revert()`).
 - Animate only `transform` and `opacity`.
@@ -80,7 +80,7 @@ Visual reference: `docs/design/` (static HTML mockups of every section, the mobi
 
 - [x] Phase 0 - Setup: scaffold, dependencies, tokens, hooks, documentation (v0.1.0).
 - [x] Phase 1 - Foundation (v0.2.0): fonts, layout, `AppHeader`, `MobileMenu`, `AppCursor`, `AppLoader`, Lenis, grain, `useSectionTheme`, `useSectionRoute`.
-- [ ] Phase 2 - Home sections (static + GSAP): hero, projects, about, skills (static version), experience, contact.
+- [x] Phase 2 - Home sections (static + GSAP) (v0.3.0): hero, projects, about, skills (static version), experience, contact.
 - [ ] Phase 3 - Project routes: `/archivo`, `/proyectos/:slug` and the "Recompile" transition.
 - [ ] Phase 4 - Polish: mobile, accessibility, performance, prerender, meta/OG, sitemap, E2E and axe passing.
 - [ ] Phase 5 - Heavy effects: matter.js physics in Skills and OGL WebGL distortion on the project preview, lazy loaded and disabled on touch or with reduced motion.
@@ -92,12 +92,17 @@ Visual reference: `docs/design/` (static HTML mockups of every section, the mobi
 
 ## Current status
 
-- Phase in progress: Phase 1 is closed (v0.2.0). The next one is Phase 2.
-- Done in Phase 1: custom cursor (`AppCursor`, variants via `data-cursor` and `data-cursor-label`), intro loader (first visit per session, skipped by an inline script in `index.html`), header, mobile menu with focus trap, grain overlay, Lenis smooth scroll synced with GSAP, per-section page atmosphere (`useSectionTheme`) and URL/scroll sync (`useSectionRoute`). `HomeView` still renders placeholder blocks.
-- Next step: Phase 2 - replace each placeholder in `HomeView` with a real section component under `src/components/sections/` (start with the hero), using typed data in `src/content/`.
+- Phase in progress: Phase 2 is closed (v0.3.0). The next one is Phase 3.
+- Done in Phase 2: the six sections under `src/components/sections/` (hero with letter reveal and pointer-proximity width plus lime orb, projects with filters, FLIP list and floating preview, about with scroll-scrubbed words and count-up figures, skills as a static pile with category highlight, experience with a sticky digit-reel year and accordion, contact with scroll-stretched heading, magnetic button and copy-to-clipboard email), typed placeholder content in `src/content/`, `useMotion` and text effects, and a stub `ProjectView` at `/proyectos/:slug` (prerendered through `ssgOptions.includedRoutes` in `vite.config.ts`).
+- Next step: Phase 3 - `ArchiveView` at `/archivo` with filters, a real `ProjectView` case study layout, and the "Recompile" page transition between views (see `docs/design/animation-notes.md`). Then add a "Ver archivo completo" link in `ProjectsSection`.
+- Known gaps, by design: the Contact curtain-from-below entrance is not built (the body theme crossfade stands in for it); the About section has no CV link; Skills physics (drag and throw) is Phase 5; mobile layouts are functional but get their full pass in Phase 4.
 - Things to know:
-  - Components must stay SSR-safe (`vite-ssg` prerenders): touch `window`/`document` only in `onMounted` or helpers guarded for the client.
+  - Components must stay SSR-safe (`vite-ssg` prerenders): touch `window`/`document` only in `onMounted` or inside `useMotion` setups.
+  - Use `useMotion(scopeRef, setup)` for every GSAP animation. It scopes selectors, reverts on unmount and exposes `motion` (reduced-motion off) and `fine` (mouse pointer). Return early when `motion` is false so the static layout is untouched.
+  - `SplitText`: pass `aria: 'none'` and label the heading yourself (axe rejects `aria-label` on spans and paragraphs). Avoid `autoSplit` when the animation must not restart on resize.
+  - In scoped styles, a global selector with a descendant must be wrapped whole: `:global(html.js .hero__title)`. Writing `:global(html.js) .hero__title` compiles to `html.js` alone and hides the page.
   - `lockScroll()`/`unlockScroll()` are counted; always pair them (loader and menu use them).
   - Section ids in the DOM equal the ids in `SECTIONS`; do not rename one without the other.
-  - E2E: `pnpm exec playwright install chromium` once; tests set `portfolio:loader-seen` to skip the loader. The Vue DevTools overlay is excluded from axe because it only exists in dev.
+  - E2E: run `pnpm exec playwright install chromium` once. Tests set `portfolio:loader-seen` to skip the loader. The axe test runs with reduced motion because the About text is intentionally dimmed until scrolled, and the Vue DevTools overlay is excluded because it only exists in dev.
+  - Check visual work with screenshots (`page.screenshot`) at 1200x675 and 390x844 against `docs/design/`; unit and E2E tests alone missed layout bugs in this phase.
 - Open questions: real content (projects, experience, photos, email) and the domain.
