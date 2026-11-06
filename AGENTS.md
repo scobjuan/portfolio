@@ -79,7 +79,7 @@ Visual reference: `docs/design/` (static HTML mockups of every section, the mobi
 ## Phase roadmap
 
 - [x] Phase 0 - Setup: scaffold, dependencies, tokens, hooks, documentation (v0.1.0).
-- [ ] Phase 1 - Foundation: fonts, layout, `AppHeader`, `MobileMenu`, `AppCursor`, `AppLoader`, Lenis, grain, `useSectionTheme`, `useSectionRoute`.
+- [x] Phase 1 - Foundation (v0.2.0): fonts, layout, `AppHeader`, `MobileMenu`, `AppCursor`, `AppLoader`, Lenis, grain, `useSectionTheme`, `useSectionRoute`.
 - [ ] Phase 2 - Home sections (static + GSAP): hero, projects, about, skills (static version), experience, contact.
 - [ ] Phase 3 - Project routes: `/archivo`, `/proyectos/:slug` and the "Recompile" transition.
 - [ ] Phase 4 - Polish: mobile, accessibility, performance, prerender, meta/OG, sitemap, E2E and axe passing.
@@ -92,7 +92,12 @@ Visual reference: `docs/design/` (static HTML mockups of every section, the mobi
 
 ## Current status
 
-- Phase in progress: Phase 0 is closed (v0.1.0). The next one is Phase 1.
-- Done: project created in `~/projects/portfolio`, dependencies installed, git hooks, commit and versioning setup, base routes, design tokens, placeholder `HomeView` and `NotFoundView`, English-only repository policy.
-- Next step: Phase 1 - Foundation (fonts are already imported; build the layout, header, mobile menu, cursor, loader, Lenis and section composables).
+- Phase in progress: Phase 1 is closed (v0.2.0). The next one is Phase 2.
+- Done in Phase 1: custom cursor (`AppCursor`, variants via `data-cursor` and `data-cursor-label`), intro loader (first visit per session, skipped by an inline script in `index.html`), header, mobile menu with focus trap, grain overlay, Lenis smooth scroll synced with GSAP, per-section page atmosphere (`useSectionTheme`) and URL/scroll sync (`useSectionRoute`). `HomeView` still renders placeholder blocks.
+- Next step: Phase 2 - replace each placeholder in `HomeView` with a real section component under `src/components/sections/` (start with the hero), using typed data in `src/content/`.
+- Things to know:
+  - Components must stay SSR-safe (`vite-ssg` prerenders): touch `window`/`document` only in `onMounted` or helpers guarded for the client.
+  - `lockScroll()`/`unlockScroll()` are counted; always pair them (loader and menu use them).
+  - Section ids in the DOM equal the ids in `SECTIONS`; do not rename one without the other.
+  - E2E: `pnpm exec playwright install chromium` once; tests set `portfolio:loader-seen` to skip the loader. The Vue DevTools overlay is excluded from axe because it only exists in dev.
 - Open questions: real content (projects, experience, photos, email) and the domain.
