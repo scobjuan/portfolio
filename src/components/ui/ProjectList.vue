@@ -63,6 +63,7 @@ useMotion(root, ({ motion }, ctx) => {
           @pointerenter="emit('activate', project.slug)"
           @focus="emit('activate', project.slug)"
         >
+          <span class="row__thumb" aria-hidden="true" :style="{ '--hue': project.hue }"></span>
           <span class="row__index">{{ String(index + 1).padStart(2, '0') }}</span>
           <span class="row__mask"
             ><span class="row__title">{{ project.title }}</span></span
@@ -165,14 +166,54 @@ useMotion(root, ({ motion }, ctx) => {
   inset-inline: 0;
 }
 
+/* Mobile: each project becomes a card with a thumbnail, as in the mobile mockup. */
+.row__thumb {
+  display: none;
+}
+
 @media (max-width: 960px) {
   .row__link {
-    grid-template-columns: 44px 1fr 56px;
-    min-height: 88px;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      'thumb thumb'
+      'title year'
+      'stack stack';
+    gap: 12px 16px;
+    align-items: baseline;
+    padding-block: 20px 22px;
+  }
+
+  .row__thumb {
+    display: block;
+    grid-area: thumb;
+    height: 200px;
+    border-radius: var(--radius-card);
+    background: repeating-linear-gradient(
+      135deg,
+      hsl(var(--hue) 35% 22%) 0 12px,
+      hsl(var(--hue) 35% 17%) 12px 24px
+    );
+  }
+
+  .row__index {
+    display: none;
+  }
+
+  .row__mask {
+    grid-area: title;
+  }
+
+  .row__title {
+    font-size: clamp(22px, 6.4vw, 28px);
+  }
+
+  .row__year {
+    grid-area: year;
   }
 
   .row__stack {
-    display: none;
+    grid-area: stack;
+    opacity: 0.75;
   }
 }
 </style>

@@ -52,4 +52,17 @@ const countFor = (id: string) =>
   background: var(--fg);
   color: var(--bg);
 }
+
+@media (max-width: 960px) {
+  .filters {
+    flex-wrap: nowrap;
+    max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .chip {
+    flex-shrink: 0;
+  }
+}
 </style>
