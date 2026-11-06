@@ -62,6 +62,8 @@ export function scrollToElement(
   { immediate = false, onComplete }: ScrollOptions = {},
 ) {
   if (lenis) {
+    // Lenis caches the page size; a freshly mounted view can be taller than the last one.
+    lenis.resize()
     lenis.scrollTo(el, {
       immediate,
       force: true,
