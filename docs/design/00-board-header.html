@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Encabezado — Estado Reactivo</title>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#D4FF3A}a:hover{color:#EDEAE2}
+</style>
+</helmet>
+<div style="width: 2480px; height: 1180px; box-sizing: border-box; padding: 72px 80px; background: #0E0E0C; color: #EDEAE2; font-family: Inter, sans-serif; display: flex; flex-direction: column; gap: 56px; overflow: hidden; position: relative">
+
+  <div style="display: flex; justify-content: space-between; align-items: center; font-family: 'JetBrains Mono', monospace; font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase; color: #8A877F">
+    <span>Juan Escobar — Portafolio 2026 · Tablero de dirección de arte</span>
+    <span>v1.0 · Desktop 1200×675 · Móvil 390×844</span>
+    <span style="display: flex; align-items: center; gap: 10px; color: #D4FF3A"><span style="width: 10px; height: 10px; border-radius: 50%; background: #D4FF3A"></span>Concepto</span>
+  </div>
+
+  <div style="display: flex; align-items: flex-end; gap: 64px">
+    <h1 style="margin: 0; font-family: Archivo, sans-serif; font-weight: 900; font-stretch: 125%; font-size: 210px; line-height: 0.82; letter-spacing: -0.04em; text-transform: uppercase">Estado<br>Reactivo<span style="color: #D4FF3A">.</span></h1>
+    <div style="display: flex; flex-direction: column; gap: 20px; max-width: 760px; padding-bottom: 10px">
+      <code style="font-family: 'JetBrains Mono', monospace; font-size: 18px; color: #D4FF3A">const visitante = ref(null) // la interfaz observa</code>
+      <p style="margin: 0; font-size: 26px; line-height: 1.4; color: #EDEAE2">Un portafolio que se comporta como el estado de Vue: cada gesto del visitante —mover el cursor, hacer scroll, hacer clic— es una mutación, y la interfaz reacciona. Tipografía gigante que se estira, color que cambia por módulo y transiciones que «recompilan» la página.</p>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1.15fr 1fr 1fr 1.25fr; gap: 56px; flex-grow: 1; border-top: 1px solid #2A2A27; padding-top: 40px">
+
+    <div style="display: flex; flex-direction: column; gap: 18px">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; color: #8A877F">(A) Paleta</span>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+        <div style="height: 130px; background: #0E0E0C; border: 1px solid #3A3A36; border-radius: 6px; padding: 14px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between"><strong style="font-size: 17px">Tinta</strong><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #8A877F">#0E0E0C · fondo base</span></div>
+        <div style="height: 130px; background: #EDEAE2; color: #0E0E0C; border-radius: 6px; padding: 14px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between"><strong style="font-size: 17px">Hueso</strong><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #4A4843">#EDEAE2 · texto / papel</span></div>
+        <div style="height: 130px; background: #D4FF3A; color: #0E0E0C; border-radius: 6px; padding: 14px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between"><strong style="font-size: 17px">Lima reactiva</strong><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #2C3310">#D4FF3A · acento, cursor</span></div>
+        <div style="height: 130px; background: #2E3BFF; color: #EDEAE2; border-radius: 6px; padding: 14px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between"><strong style="font-size: 17px">Cobalto</strong><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #EDEAE2">#2E3BFF · plano técnico</span></div>
+        <div style="height: 64px; background: #17171A; border: 1px solid #3A3A36; border-radius: 6px; padding: 14px; box-sizing: border-box; display: flex; justify-content: space-between; align-items: center"><strong style="font-size: 15px">Grafito</strong><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #8A877F">#17171A</span></div>
+        <div style="height: 64px; background: #8A877F; color: #0E0E0C; border-radius: 6px; padding: 14px; box-sizing: border-box; display: flex; justify-content: space-between; align-items: center"><strong style="font-size: 15px">Ceniza</strong><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px">#8A877F</span></div>
+      </div>
+      <p style="margin: 0; font-size: 15px; line-height: 1.5; color: #8A877F">Regla: un solo acento por pantalla. Ceniza solo sobre tinta/grafito; sobre hueso usar #5E5B54.</p>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 18px">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; color: #8A877F">(B) Tipografía</span>
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <span style="font-family: Archivo, sans-serif; font-weight: 900; font-stretch: 125%; font-size: 92px; line-height: 0.9; letter-spacing: -0.03em">Aa</span>
+        <span style="font-size: 17px; font-weight: 600">Archivo Variable — Display</span>
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #8A877F">wght 800–900 · wdth 62–125 (eje animable) · tracking −4 %</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 6px; border-top: 1px solid #2A2A27; padding-top: 16px">
+        <span style="font-size: 30px; font-weight: 500">Inter — Texto 16/24</span>
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #8A877F">400 · 500 · 600 · párrafos y UI</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 6px; border-top: 1px solid #2A2A27; padding-top: 16px">
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 22px; color: #D4FF3A">JetBrains Mono — (01) ETIQUETAS</span>
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #8A877F">12–14 px · mayúsculas · tracking +8 % · índices, fechas, código</span>
+      </div>
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #8A877F">Escala: 12 · 14 · 16 · 20 · 28 · 44 · 72 · 120 · 210</span>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 18px">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; color: #8A877F">(C) Principios</span>
+      <div style="display: flex; flex-direction: column; gap: 20px">
+        <div style="display: flex; gap: 16px"><span style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #D4FF3A">01</span><div><strong style="font-size: 19px">Reacción, no decoración</strong><p style="margin: 6px 0 0; font-size: 15px; line-height: 1.5; color: #B5B2AA">Cada efecto responde a algo que hizo el visitante. Nada se mueve «porque sí».</p></div></div>
+        <div style="display: flex; gap: 16px"><span style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #D4FF3A">02</span><div><strong style="font-size: 19px">La tipografía es la imagen</strong><p style="margin: 6px 0 0; font-size: 15px; line-height: 1.5; color: #B5B2AA">Titulares de borde a borde; el eje de ancho de Archivo es el material que se anima.</p></div></div>
+        <div style="display: flex; gap: 16px"><span style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #D4FF3A">03</span><div><strong style="font-size: 19px">Un módulo, una atmósfera</strong><p style="margin: 6px 0 0; font-size: 15px; line-height: 1.5; color: #B5B2AA">El fondo cambia de color al cambiar de sección; el scroll se siente como pasar de sala.</p></div></div>
+        <div style="display: flex; gap: 16px"><span style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #D4FF3A">04</span><div><strong style="font-size: 19px">Rápido y accesible</strong><p style="margin: 6px 0 0; font-size: 15px; line-height: 1.5; color: #B5B2AA">Curva expo.out, 600–900 ms. Con prefers-reduced-motion todo pasa a fundidos de 200 ms.</p></div></div>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 18px">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; color: #8A877F">(D) Atmósfera por módulo</span>
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <div style="display: flex; align-items: center; gap: 16px; height: 62px; padding: 0 18px; border-radius: 6px; background: #0E0E0C; border: 1px solid #3A3A36"><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #D4FF3A">01</span><strong style="font-size: 17px; width: 140px">Inicio</strong><span style="font-size: 15px; color: #B5B2AA; flex-grow: 1">Noche eléctrica — tinta + lima</span><span style="width: 22px; height: 22px; border-radius: 50%; background: #D4FF3A"></span></div>
+        <div style="display: flex; align-items: center; gap: 16px; height: 62px; padding: 0 18px; border-radius: 6px; background: #17171A; border: 1px solid #3A3A36"><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #8A877F">02</span><strong style="font-size: 17px; width: 140px">Proyectos</strong><span style="font-size: 15px; color: #B5B2AA; flex-grow: 1">Sala oscura — la imagen manda</span><span style="width: 22px; height: 22px; border-radius: 50%; background: #EDEAE2"></span></div>
+        <div style="display: flex; align-items: center; gap: 16px; height: 62px; padding: 0 18px; border-radius: 6px; background: #EDEAE2; color: #0E0E0C"><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #5E5B54">03</span><strong style="font-size: 17px; width: 140px">Sobre mí</strong><span style="font-size: 15px; color: #4A4843; flex-grow: 1">Papel a la luz del día — inversión</span><span style="width: 22px; height: 22px; border-radius: 50%; background: #0E0E0C"></span></div>
+        <div style="display: flex; align-items: center; gap: 16px; height: 62px; padding: 0 18px; border-radius: 6px; background: #2E3BFF; color: #EDEAE2"><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px">04</span><strong style="font-size: 17px; width: 140px">Habilidades</strong><span style="font-size: 15px; flex-grow: 1">Plano técnico — cobalto + hueso</span><span style="width: 22px; height: 22px; border-radius: 50%; background: #EDEAE2"></span></div>
+        <div style="display: flex; align-items: center; gap: 16px; height: 62px; padding: 0 18px; border-radius: 6px; background: #0E0E0C; border: 1px solid #3A3A36"><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #8A877F">05</span><strong style="font-size: 17px; width: 140px">Experiencia</strong><span style="font-size: 15px; color: #B5B2AA; flex-grow: 1">Línea de tiempo — lima solo en lo actual</span><span style="width: 22px; height: 22px; border-radius: 50%; border: 2px solid #D4FF3A; box-sizing: border-box"></span></div>
+        <div style="display: flex; align-items: center; gap: 16px; height: 62px; padding: 0 18px; border-radius: 6px; background: #D4FF3A; color: #0E0E0C"><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px">06</span><strong style="font-size: 17px; width: 140px">Contacto</strong><span style="font-size: 15px; flex-grow: 1">Señal abierta — lima a sangre</span><span style="width: 22px; height: 22px; border-radius: 50%; background: #0E0E0C"></span></div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 14px; margin-top: 6px">
+        <span style="position: relative; width: 44px; height: 44px; border: 1.5px solid #EDEAE2; border-radius: 50%; display: flex; align-items: center; justify-content: center"><span style="width: 8px; height: 8px; border-radius: 50%; background: #D4FF3A"></span></span>
+        <span style="font-size: 15px; color: #B5B2AA">Cursor: punto lima 8 px + anillo 44 px con inercia · grano de película 4 % sobre todo el sitio</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":2480,"height":1180}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

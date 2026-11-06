@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Móvil — Menú abierto</title>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#0E0E0C;text-decoration:none}a:hover{color:#2E3BFF}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #D4FF3A; color: #0E0E0C; font-family: Inter, sans-serif; position: relative; overflow: hidden; display: flex; flex-direction: column">
+
+  <header style="display: flex; justify-content: space-between; align-items: center; padding: 22px 20px">
+    <a href="#" style="font-family: Archivo, sans-serif; font-weight: 900; font-stretch: 125%; font-size: 20px">JE.</a>
+    <button type="button" aria-label="Cerrar menú" style="height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid #0E0E0C; background: #0E0E0C; color: #D4FF3A; display: flex; align-items: center; gap: 10px; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase">Cerrar
+      <svg aria-hidden="true" width="14" height="14" viewBox="0 0 14 14" stroke="#D4FF3A" stroke-width="1.8"><line x1="1" y1="1" x2="13" y2="13"></line><line x1="13" y1="1" x2="1" y2="13"></line></svg>
+    </button>
+  </header>
+
+  <nav aria-label="Menú móvil" style="display: flex; flex-direction: column; padding: 30px 20px 0">
+    <a href="#" style="display: flex; align-items: baseline; gap: 14px; height: 76px; border-bottom: 1.5px solid #0E0E0C"><span style="font-family: 'JetBrains Mono', monospace; font-size: 12px">01</span><span style="font-family: Archivo, sans-serif; font-weight: 900; font-stretch: 125%; font-size: 46px; letter-spacing: -0.04em; text-transform: uppercase; line-height: 76px">Inicio</span></a>
+    <a href="#" style="display: flex; align-items: baseline; gap: 14px; height: 76px; border-bottom: 1.5px solid #0E0E0C"><span style="font-family: 'JetBrains Mono', monospace; font-size: 12px">02</span><span style="font-family: Archivo, sans-serif; font-weight: 900; font-stretch: 100%; font-size: 46px; letter-spacing: -0.04em; text-transform: uppercase; line-height: 76px">Proyectos</span></a>
+    <a href="#" style="display: flex; align-items: baseline; gap: 14px; height: 76px; border-bottom: 1.5px solid #0E0E0C"><span style="font-family: 'JetBrains Mono', monospace; font-size: 12px">03</span><span style="font-family: Archivo, sans-serif; font-weight: 900; font-stretch: 110%; font-size: 46px; letter-spacing: -0.04em; text-transform: uppercase; line-height: 76px">Sobre mí</span></a>
+    <a href="#" style="display: flex; align-items: baseline; gap: 14px; height: 76px; border-bottom: 1.5px solid #0E0E0C"><span style="font-family: 'JetBrains Mono', monospace; font-size: 12px">04</span><span style="font-family: Archivo, sans-serif; font-weight: 900; font-stretch: 80%; font-size: 46px; letter-spacing: -0.04em; text-transform: uppercase; line-height: 76px">Habilidades</span></a>
+    <a href="#" style="display: flex; align-items: baseline; gap: 14px; height: 76px; border-bottom: 1.5px solid #0E0E0C"><span style="font-family: 'JetBrains Mono', monospace; font-size: 12px">05</span><span style="font-family: Archivo, sans-serif; font-weight: 900; font-stretch: 80%; font-size: 46px; letter-spacing: -0.04em; text-transform: uppercase; line-height: 76px">Experiencia</span></a>
+    <a href="#" style="display: flex; align-items: baseline; gap: 14px; height: 76px; border-bottom: 1.5px solid #0E0E0C"><span style="font-family: 'JetBrains Mono', monospace; font-size: 12px">06</span><span style="font-family: Archivo, sans-serif; font-weight: 900; font-stretch: 100%; font-size: 46px; letter-spacing: -0.04em; text-transform: uppercase; line-height: 76px">Contacto</span></a>
+  </nav>
+
+  <div style="margin-top: auto; padding: 0 20px 28px; display: flex; flex-direction: column; gap: 16px">
+    <a href="mailto:hola@tudominio.com" style="font-family: Archivo, sans-serif; font-weight: 800; font-stretch: 105%; font-size: 22px; border-bottom: 2px solid #0E0E0C; align-self: flex-start; padding-bottom: 2px">[hola@tudominio.com]</a>
+    <div style="display: flex; gap: 20px; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase">
+      <a href="#" style="height: 44px; display: flex; align-items: center">GitHub ↗</a>
+      <a href="#" style="height: 44px; display: flex; align-items: center">LinkedIn ↗</a>
+      <a href="#" style="height: 44px; display: flex; align-items: center">[Otra] ↗</a>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Sobre mí</title>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#0E0E0C}a:hover{color:#2E3BFF}
+@keyframes spin{to{transform:rotate(360deg)}}
+</style>
+</helmet>
+<div style="width: 1200px; height: 675px; box-sizing: border-box; background: #EDEAE2; color: #0E0E0C; font-family: Inter, sans-serif; position: relative; overflow: hidden; padding: 48px; display: grid; grid-template-columns: 400px 1fr; gap: 64px">
+
+  <div style="position: relative; display: flex; flex-direction: column; gap: 14px">
+    <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: #5E5B54">(03) Sobre mí</span>
+    <div style="flex-grow: 1; border-radius: 6px; background: #0E0E0C; position: relative; overflow: hidden; display: flex; align-items: flex-end; padding: 18px; box-sizing: border-box">
+      <div aria-hidden="true" style="position: absolute; inset: 0; background: repeating-linear-gradient(0deg, #1A1A17 0 2px, #0E0E0C 2px 6px)"></div>
+      <span style="position: relative; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #B5B2AA">[Retrato · duotono tinta/hueso → color en hover]</span>
+    </div>
+    <div aria-hidden="true" style="position: absolute; right: -44px; top: 40px; width: 128px; height: 128px; border-radius: 50%; background: #D4FF3A; display: flex; align-items: center; justify-content: center">
+      <svg width="128" height="128" viewBox="0 0 128 128" style="position: absolute; inset: 0; animation: spin 14s linear infinite">
+        <defs><path id="circ" d="M64,64 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"></path></defs>
+        <text style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 2.4px; text-transform: uppercase" fill="#0E0E0C"><textPath href="#circ">Disponible para proyectos · Disponible ·</textPath></text>
+      </svg>
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0E0E0C" stroke-width="2" stroke-linecap="round"><path d="M7 17 17 7M9 7h8v8"></path></svg>
+    </div>
+  </div>
+
+  <div style="display: flex; flex-direction: column; justify-content: space-between; padding-top: 30px">
+    <p style="margin: 0; font-family: Archivo, sans-serif; font-weight: 700; font-stretch: 100%; font-size: 46px; line-height: 1.08; letter-spacing: -0.025em">Construyo interfaces que se sienten vivas: rápidas, accesibles y con <span style="font-stretch: 125%; font-weight: 900">detalle</span> en cada transición. <span style="color: #827F77">Me apasiona el punto donde el código se vuelve movimiento y el movimiento se vuelve experiencia.</span></p>
+
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; border-top: 1px solid #0E0E0C; padding-top: 24px">
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <span style="font-family: Archivo, sans-serif; font-weight: 900; font-stretch: 125%; font-size: 52px; line-height: 1">[X]+</span>
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #5E5B54">Años construyendo web</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <span style="font-family: Archivo, sans-serif; font-weight: 900; font-stretch: 125%; font-size: 52px; line-height: 1">[XX]</span>
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #5E5B54">Proyectos publicados</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <span style="font-size: 18px; line-height: 1.45">Base en [Ciudad]. Trabajo en remoto en español e [inglés].</span>
+        <a href="#" style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase">Descargar CV (PDF) ↓</a>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1200,"height":675}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

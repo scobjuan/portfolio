@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Inicio</title>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#EDEAE2;text-decoration:none}a:hover{color:#D4FF3A}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+</style>
+</helmet>
+<div style="width: 1200px; height: 675px; box-sizing: border-box; background: #0E0E0C; color: #EDEAE2; font-family: Inter, sans-serif; position: relative; overflow: hidden; display: flex; flex-direction: column">
+
+  <header style="display: flex; justify-content: space-between; align-items: center; padding: 28px 48px; font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase">
+    <a href="#" style="font-family: Archivo, sans-serif; font-weight: 900; font-stretch: 125%; font-size: 22px; letter-spacing: -0.02em">JE<span style="color: #D4FF3A">.</span></a>
+    <nav aria-label="Principal" style="display: flex; gap: 28px">
+      <a href="#"><span style="color: #8A877F">01</span> Proyectos</a>
+      <a href="#"><span style="color: #8A877F">02</span> Sobre mí</a>
+      <a href="#"><span style="color: #8A877F">03</span> Habilidades</a>
+      <a href="#"><span style="color: #8A877F">04</span> Experiencia</a>
+      <a href="#"><span style="color: #8A877F">05</span> Contacto</a>
+    </nav>
+    <span style="display: flex; align-items: center; gap: 10px; border: 1px solid #3A3A36; border-radius: 999px; padding: 10px 16px"><span style="width: 8px; height: 8px; border-radius: 50%; background: #D4FF3A; animation: pulse 2s infinite"></span>Disponible · [mes 2026]</span>
+  </header>
+
+  <div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; padding: 0 48px; position: relative">
+    <div style="display: flex; align-items: flex-end; justify-content: space-between">
+      <h1 style="margin: 0; font-family: Archivo, sans-serif; font-weight: 900; font-size: 196px; line-height: 0.8; letter-spacing: -0.045em; text-transform: uppercase"><span style="font-stretch: 125%">Ju</span><span style="font-stretch: 92%">an</span></h1>
+      <div style="display: flex; flex-direction: column; gap: 10px; padding-bottom: 14px; width: 330px">
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #8A877F">(Rol)</span>
+        <p style="margin: 0; font-size: 20px; line-height: 1.35">Desarrollador web. Construyo interfaces vivas con <span style="color: #D4FF3A">JavaScript</span> y <span style="color: #D4FF3A">Vue 3</span>.</p>
+      </div>
+    </div>
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; margin-top: 8px">
+      <div style="display: flex; flex-direction: column; gap: 6px; padding-bottom: 18px; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #8A877F">
+        <span>[Ciudad, País]</span>
+        <span>Hora local [HH:MM]</span>
+      </div>
+      <h1 style="margin: 0; font-family: Archivo, sans-serif; font-weight: 900; font-size: 196px; line-height: 0.8; letter-spacing: -0.045em; text-transform: uppercase; text-align: right"><span style="font-stretch: 80%">Esc</span><span style="font-stretch: 125%">obar</span></h1>
+    </div>
+
+    <div aria-hidden="true" style="position: absolute; left: 600px; top: 58px; width: 150px; height: 150px; border-radius: 50%; background: #D4FF3A; mix-blend-mode: difference"></div>
+    <div aria-hidden="true" style="position: absolute; left: 734px; top: 196px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #0E0E0C; background: #D4FF3A; padding: 4px 8px; border-radius: 4px">Cursor · difference</div>
+  </div>
+
+  <div style="display: flex; justify-content: space-between; align-items: center; padding: 0 48px 18px; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #8A877F">
+    <span style="display: flex; align-items: center; gap: 10px"><svg aria-hidden="true" width="14" height="20" viewBox="0 0 14 20" fill="none" stroke="#EDEAE2" stroke-width="1.5"><rect x="1" y="1" width="12" height="18" rx="6"></rect><line x1="7" y1="5" x2="7" y2="9"></line></svg>Desliza para explorar</span>
+    <code style="color: #D4FF3A">const visitante = ref(true)</code>
+    <span>© 2026</span>
+  </div>
+
+  <div style="border-top: 1px solid #2A2A27; overflow: hidden; height: 54px; display: flex; align-items: center">
+    <div style="display: flex; gap: 36px; white-space: nowrap; animation: mq 22s linear infinite; font-family: Archivo, sans-serif; font-weight: 800; font-stretch: 110%; font-size: 22px; text-transform: uppercase">
+      <span>Vue 3</span><span style="color: #D4FF3A">●</span><span>Composition API</span><span style="color: #D4FF3A">●</span><span>JavaScript</span><span style="color: #D4FF3A">●</span><span>Vite</span><span style="color: #D4FF3A">●</span><span>Pinia</span><span style="color: #D4FF3A">●</span><span>GSAP</span><span style="color: #D4FF3A">●</span><span>Interfaces que reaccionan</span><span style="color: #D4FF3A">●</span>
+      <span>Vue 3</span><span style="color: #D4FF3A">●</span><span>Composition API</span><span style="color: #D4FF3A">●</span><span>JavaScript</span><span style="color: #D4FF3A">●</span><span>Vite</span><span style="color: #D4FF3A">●</span><span>Pinia</span><span style="color: #D4FF3A">●</span><span>GSAP</span><span style="color: #D4FF3A">●</span><span>Interfaces que reaccionan</span><span style="color: #D4FF3A">●</span>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1200,"height":675}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

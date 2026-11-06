@@ -1,0 +1,36 @@
+:root {
+  /* Palette */
+  --color-ink: #0e0e0c;
+  --color-bone: #ede9e2;
+  --color-lime: #d4ff3a;
+  --color-cobalt: #2e3bff;
+  --color-graphite: #17171a;
+  --color-ash: #8a877f;
+
+  /* Active atmosphere (each section overrides it via data-theme) */
+  --bg: var(--color-ink);
+  --fg: var(--color-bone);
+  --accent: var(--color-lime);
+
+  /* Typography */
+  --font-display: 'Archivo Variable', system-ui, sans-serif;
+  --font-body: 'Inter Variable', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, monospace;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-curtain: cubic-bezier(0.76, 0, 0.24, 1);
+  --dur-fast: 200ms;
+  --dur-base: 600ms;
+  --dur-slow: 900ms;
+  --dur-page: 1200ms;
+
+  /* Spacing and grid */
+  --space: 8px;
+  --grid-margin: 48px;
+  --grid-gutter: 24px;
+
+  /* Radii */
+  --radius-card: 6px;
+  --radius-pill: 999px;
+}
