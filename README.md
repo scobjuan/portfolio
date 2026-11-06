@@ -28,6 +28,12 @@ pnpm dev
 | `pnpm test:e2e`   | End-to-end tests with Playwright                                 |
 | `pnpm release`    | Computes the version, updates `CHANGELOG.md` and creates the tag |
 
+## Configuration
+
+| Variable        | Purpose                                                                                                                                          |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `VITE_SITE_URL` | Public origin of the site, without trailing slash. Used for canonical URLs, Open Graph tags, `sitemap.xml` and `robots.txt`. See `.env.example`. |
+
 ## Structure
 
 ```
