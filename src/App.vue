@@ -6,7 +6,11 @@ import AppHeader from '@/components/layout/AppHeader.vue'
 import AppLoader from '@/components/layout/AppLoader.vue'
 import GrainOverlay from '@/components/layout/GrainOverlay.vue'
 import MobileMenu from '@/components/layout/MobileMenu.vue'
+import PageTransition from '@/components/layout/PageTransition.vue'
+import { useRoute } from 'vue-router'
 import { destroyLenis, initLenis } from '@/composables/useLenis'
+import { cancelPageTransition, enterPage, leavePage } from '@/composables/usePageTransition'
+import { getRouteLabel, getRouteTheme, getViewKey } from '@/router/meta'
 
 useHead({
   htmlAttrs: { lang: 'es' },
@@ -20,6 +24,17 @@ useHead({
   ],
 })
 
+const route = useRoute()
+
+// The route is already the destination when the old view starts leaving.
+function onLeave(el: Element, done: () => void) {
+  leavePage(el, done, {
+    theme: getRouteTheme(route),
+    label: getRouteLabel(route),
+    path: route.path,
+  })
+}
+
 onMounted(initLenis)
 onBeforeUnmount(destroyLenis)
 </script>
@@ -31,5 +46,17 @@ onBeforeUnmount(destroyLenis)
   <GrainOverlay />
   <AppHeader />
   <MobileMenu />
-  <RouterView />
+  <PageTransition />
+  <RouterView v-slot="{ Component, route: current }">
+    <Transition
+      :css="false"
+      mode="out-in"
+      @leave="onLeave"
+      @enter="enterPage"
+      @leave-cancelled="cancelPageTransition"
+      @enter-cancelled="cancelPageTransition"
+    >
+      <component :is="Component" :key="getViewKey(current)" />
+    </Transition>
+  </RouterView>
 </template>

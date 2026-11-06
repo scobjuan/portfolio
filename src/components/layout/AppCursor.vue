@@ -15,7 +15,7 @@ let moveRing: ((value: number) => void) | undefined
 let moveRingY: ((value: number) => void) | undefined
 
 function onMove(event: PointerEvent) {
-  if (cursor.variant === 'hidden') cursor.variant = 'default'
+  if (cursor.variant === 'hidden' && !cursor.locked) cursor.variant = 'default'
   moveDot?.(event.clientX)
   moveDotY?.(event.clientY)
   moveRing?.(event.clientX)
@@ -23,6 +23,7 @@ function onMove(event: PointerEvent) {
 }
 
 function onOver(event: PointerEvent) {
+  if (cursor.locked) return
   const { variant, label } = resolveCursor(event.target)
   cursor.variant = variant
   cursor.label = label
@@ -155,8 +156,15 @@ onBeforeUnmount(() => {
   background: #fff;
 }
 
+.is-dot .cursor__ring {
+  width: 8px;
+  height: 8px;
+  background: #fff;
+}
+
 .is-hidden .cursor__ring,
 .is-hidden .cursor__dot,
+.is-dot .cursor__dot,
 .is-text .cursor__dot {
   opacity: 0;
 }

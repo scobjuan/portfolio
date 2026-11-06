@@ -93,3 +93,8 @@ html[data-loader='skip'] .loader-wrap {
   white-space: nowrap;
   border: 0;
 }
+
+/* The curtain hides the swap, so the body must not crossfade colours underneath it. */
+html.is-page-transition body {
+  transition: none;
+}

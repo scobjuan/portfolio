@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { onBeforeUnmount, onMounted, ref } from 'vue'
 import gsap from 'gsap'
 import { SplitText } from 'gsap/SplitText'
 import MarqueeStrip from '@/components/ui/MarqueeStrip.vue'
 import { profile } from '@/content/profile'
-import { useLoader } from '@/composables/useLoader'
+import { onPageReady } from '@/composables/usePageTransition'
 import { EASE_OUT, useMotion } from '@/composables/useMotion'
 
-const loader = useLoader()
 const root = ref<HTMLElement | null>(null)
 const title = ref<HTMLElement | null>(null)
 const orb = ref<HTMLElement | null>(null)
@@ -58,7 +57,7 @@ useMotion(root, ({ motion, fine }, ctx) => {
   }
 
   const rest = gsap.from('[data-hero-fade]', {
-    autoAlpha: 0,
+    opacity: 0,
     y: 24,
     duration: 1,
     stagger: 0.1,
@@ -95,11 +94,7 @@ useMotion(root, ({ motion, fine }, ctx) => {
     intro?.play()
     rest.play()
   }
-  const stopWatch = watch(
-    () => loader.done,
-    (done) => done && start(),
-    { immediate: true },
-  )
+  const stopWatch = onPageReady(start)
 
   // Letters widen as the pointer gets close; the orb follows with inertia.
   let cleanupPointer = () => {}

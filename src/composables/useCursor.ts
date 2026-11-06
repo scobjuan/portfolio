@@ -1,12 +1,19 @@
 import { reactive } from 'vue'
 
-export type CursorVariant = 'default' | 'link' | 'project' | 'text' | 'hidden'
+export type CursorVariant = 'default' | 'link' | 'project' | 'text' | 'hidden' | 'dot'
 
 /** Shared cursor state. Mark elements with `data-cursor="project"` and `data-cursor-label="Ver caso"`. */
-const state = reactive<{ variant: CursorVariant; label: string; pressed: boolean }>({
+const state = reactive<{
+  variant: CursorVariant
+  label: string
+  pressed: boolean
+  /** While locked (page transition) hover targets do not change the variant. */
+  locked: boolean
+}>({
   variant: 'default',
   label: '',
   pressed: false,
+  locked: false,
 })
 
 export function useCursor() {
