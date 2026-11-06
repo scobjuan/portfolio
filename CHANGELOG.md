@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.4.0](https://github.com/scobjuan/portfolio/compare/v0.3.0...v0.4.0) (2026-11-06)
+
+### Features
+
+* **archive:** add the archive page and highlight Projects in the header ([287b357](https://github.com/scobjuan/portfolio/commit/287b357d6f11afc9449c327d8a373517d4e143a2))
+* **content:** add archive projects and case study fields ([1a0ad99](https://github.com/scobjuan/portfolio/commit/1a0ad99f28297552dbe3d74f5349c5bfc993a082))
+* **projects:** add the case study page ([a468176](https://github.com/scobjuan/portfolio/commit/a46817654ee53b2174e1c48df7e0d89044a259e9))
+* **transition:** add the Recompile page transition ([3efe015](https://github.com/scobjuan/portfolio/commit/3efe015d2d8212ad43c0109ec3b069b769746483))
+
+### Bug Fixes
+
+* **a11y:** reveal content with opacity so it stays reachable ([ca69f01](https://github.com/scobjuan/portfolio/commit/ca69f0105b04bd28946ef32a8b46b8a9bbcec658))
+* **router:** recompute the Lenis size before scrolling to a section ([864b84b](https://github.com/scobjuan/portfolio/commit/864b84b1e11dde916070a6ef47a7023b8a6288b6))
+
+### Refactoring
+
+* **projects:** extract the project list and filters ([6d1a5d9](https://github.com/scobjuan/portfolio/commit/6d1a5d95296ab4cd05419d4d29adb3a08f4ec8fa))
+
+### Documentation
+
+* close phase 3 in AGENTS.md ([6e2a574](https://github.com/scobjuan/portfolio/commit/6e2a574b2cd99c3c1e86802bbdcd57c6b8d99a76))
+* fix changelog compare links and document the remote ([eb602f2](https://github.com/scobjuan/portfolio/commit/eb602f202c19fde0dde9b11d91a09627630db1c7))
+
 ## [0.3.0](https://github.com/scobjuan/portfolio/compare/v0.2.0...v0.3.0) (2026-11-06)
 
 ### Features
