@@ -1,5 +1,10 @@
 <script setup lang="ts">
-import { SECTIONS } from '@/router/routes'
+import AboutSection from '@/components/sections/AboutSection.vue'
+import ContactSection from '@/components/sections/ContactSection.vue'
+import ExperienceSection from '@/components/sections/ExperienceSection.vue'
+import HeroSection from '@/components/sections/HeroSection.vue'
+import ProjectsSection from '@/components/sections/ProjectsSection.vue'
+import SkillsSection from '@/components/sections/SkillsSection.vue'
 import { useSectionRoute } from '@/composables/useSectionRoute'
 import { useSectionTheme } from '@/composables/useSectionTheme'
 
@@ -9,41 +14,11 @@ useSectionRoute()
 
 <template>
   <main id="main">
-    <!-- Placeholder blocks; each one is replaced by its real section in Phase 2. -->
-    <section
-      v-for="section in SECTIONS"
-      :id="section.id"
-      :key="section.id"
-      class="placeholder"
-      :data-theme="section.theme"
-    >
-      <h1 v-if="section.id === 'home'">Juan Escobar</h1>
-      <h2 v-else>{{ section.label }}</h2>
-      <p v-if="section.id === 'home'">
-        Desarrollador web. Interfaces vivas con JavaScript y Vue 3.
-      </p>
-    </section>
+    <HeroSection />
+    <ProjectsSection />
+    <AboutSection />
+    <SkillsSection />
+    <ExperienceSection />
+    <ContactSection />
   </main>
 </template>
-
-<style scoped>
-.placeholder {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 16px;
-  min-height: 100svh;
-  padding: 120px var(--grid-margin);
-}
-
-h1,
-h2 {
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-stretch: 125%;
-  font-size: clamp(36px, 10vw, 180px);
-  line-height: 0.85;
-  letter-spacing: -0.04em;
-  text-transform: uppercase;
-}
-</style>
