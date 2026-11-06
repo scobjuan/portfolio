@@ -27,7 +27,7 @@ useMotion(root, ({ motion }) => {
   title.textContent = scrambleFrame(finalText, 0)
 
   const pills = gsap.utils.toArray<HTMLElement>('.pill', section)
-  gsap.set(pills, { autoAlpha: 0 })
+  gsap.set(pills, { opacity: 0 })
 
   ScrollTrigger.create({
     trigger: section,
@@ -37,8 +37,8 @@ useMotion(root, ({ motion }) => {
       scrambleText(title, finalText, 1.1)
       gsap.fromTo(
         pills,
-        { yPercent: -400, autoAlpha: 0 },
-        { yPercent: 0, autoAlpha: 1, duration: 1, ease: 'bounce.out', stagger: 0.05 },
+        { yPercent: -400, opacity: 0 },
+        { yPercent: 0, opacity: 1, duration: 1, ease: 'bounce.out', stagger: 0.05 },
       )
     },
   })

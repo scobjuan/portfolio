@@ -46,13 +46,13 @@ export function revealOnScroll(scope: HTMLElement, selector = '[data-reveal]') {
   const items = gsap.utils.toArray<HTMLElement>(selector, scope)
   if (!items.length) return
 
-  gsap.set(items, { autoAlpha: 0, y: 32 })
+  gsap.set(items, { opacity: 0, y: 32 })
   ScrollTrigger.batch(items, {
     start: 'top 88%',
     once: true,
     onEnter: (batch) =>
       gsap.to(batch, {
-        autoAlpha: 1,
+        opacity: 1,
         y: 0,
         duration: 1,
         ease: 'expo.out',
