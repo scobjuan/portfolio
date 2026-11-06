@@ -5,8 +5,16 @@ export interface Project {
   title: string
   category: ProjectCategory
   year: number
+  /** Featured projects appear on the home page; all of them appear in the archive. */
+  featured: boolean
   stack: string[]
   summary: string
+  /** Case study copy. */
+  role: string
+  challenge: string
+  solution: string
+  results: string[]
+  links: { live?: string; repo?: string }
   /** Hue (0-360) used to tint the placeholder preview until real images exist. */
   hue: number
 }
