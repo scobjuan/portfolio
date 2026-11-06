@@ -5,6 +5,20 @@
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Juan Escobar | Desarrollador web</title>
+    <script>
+      try {
+        if (sessionStorage.getItem('portfolio:loader-seen')) {
+          document.documentElement.dataset.loader = 'skip'
+        }
+      } catch (e) {}
+    </script>
+    <noscript
+      ><style>
+        .loader-wrap {
+          display: none;
+        }
+      </style></noscript
+    >
   </head>
   <body>
     <div id="app"></div>
