@@ -1,4 +1,8 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useSeo } from '@/composables/useSeo'
+
+useSeo({ title: 'Página no encontrada', description: 'Esta página no existe.', noindex: true })
+</script>
 
 <template>
   <main>

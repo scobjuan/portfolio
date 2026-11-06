@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
-import { useHead } from '@unhead/vue'
+import { useSeo } from '@/composables/useSeo'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import ProjectVisual from '@/components/ui/ProjectVisual.vue'
@@ -16,9 +16,10 @@ const route = useRoute()
 const project = computed(() => getProject(String(route.params.slug)))
 const next = computed(() => getNextProject(String(route.params.slug)))
 
-useHead({
+useSeo({
   title: () => project.value?.title ?? 'Proyecto no encontrado',
-  meta: [{ name: 'description', content: () => project.value?.summary ?? '' }],
+  description: () => project.value?.summary ?? 'Este proyecto no existe.',
+  noindex: false,
 })
 
 const root = ref<HTMLElement | null>(null)

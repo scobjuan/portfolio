@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { useHead } from '@unhead/vue'
+import { useSeo } from '@/composables/useSeo'
 import ProjectFilters from '@/components/ui/ProjectFilters.vue'
 import ProjectList from '@/components/ui/ProjectList.vue'
 import SectionLabel from '@/components/ui/SectionLabel.vue'
@@ -12,14 +12,9 @@ import { onPageReady } from '@/composables/usePageTransition'
 import gsap from 'gsap'
 
 usePageTheme('graphite')
-useHead({
+useSeo({
   title: 'Archivo',
-  meta: [
-    {
-      name: 'description',
-      content: 'Todos los proyectos de Juan Escobar, del más reciente al más antiguo.',
-    },
-  ],
+  description: 'Todos los proyectos de Juan Escobar, del más reciente al más antiguo.',
 })
 
 const root = ref<HTMLElement | null>(null)
@@ -59,7 +54,9 @@ useMotion(root, ({ motion }, ctx) => {
           Todos los proyectos, del más reciente al más antiguo: {{ projects.length }} en total.
         </p>
       </div>
-      <div data-fade><ProjectFilters v-model="filter" :projects="projects" /></div>
+      <div class="archive__filters" data-fade>
+        <ProjectFilters v-model="filter" :projects="projects" />
+      </div>
     </header>
 
     <ProjectList :projects="visible" />
@@ -89,6 +86,11 @@ useMotion(root, ({ motion }, ctx) => {
   display: flex;
   flex-direction: column;
   gap: 14px;
+}
+
+.archive__filters {
+  min-width: 0;
+  max-width: 100%;
 }
 
 .archive__mask {

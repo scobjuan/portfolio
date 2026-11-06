@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted } from 'vue'
+import { computed, onBeforeUnmount, onMounted } from 'vue'
 import { useHead } from '@unhead/vue'
 import AppCursor from '@/components/layout/AppCursor.vue'
 import AppHeader from '@/components/layout/AppHeader.vue'
@@ -8,23 +8,39 @@ import GrainOverlay from '@/components/layout/GrainOverlay.vue'
 import MobileMenu from '@/components/layout/MobileMenu.vue'
 import PageTransition from '@/components/layout/PageTransition.vue'
 import { useRoute } from 'vue-router'
+import { profile } from '@/content/profile'
+import { useSeo, fullTitle } from '@/composables/useSeo'
+import { normalizeSiteUrl } from '@/seo/site'
 import { destroyLenis, initLenis } from '@/composables/useLenis'
 import { cancelPageTransition, enterPage, leavePage } from '@/composables/usePageTransition'
 import { getRouteLabel, getRouteTheme, getViewKey } from '@/router/meta'
 
+const route = useRoute()
+const siteUrl = normalizeSiteUrl(import.meta.env.VITE_SITE_URL)
+// Home sections are anchors of one page, so they all point at the root.
+const canonical = computed(() => siteUrl + (route.meta.section ? '/' : route.path))
+
 useHead({
   htmlAttrs: { lang: 'es' },
-  titleTemplate: (title) =>
-    title ? `${title} | Juan Escobar` : 'Juan Escobar | Desarrollador web',
+  titleTemplate: (title) => fullTitle(title),
+  link: [{ rel: 'canonical', href: () => canonical.value }],
   meta: [
-    {
-      name: 'description',
-      content: 'Portafolio de Juan Escobar, desarrollador web con JavaScript y Vue 3.',
-    },
+    { property: 'og:site_name', content: profile.name },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:locale', content: 'es_CO' },
+    { property: 'og:url', content: () => canonical.value },
+    { property: 'og:image', content: `${siteUrl}/og-image.png` },
+    { property: 'og:image:width', content: '1200' },
+    { property: 'og:image:height', content: '630' },
+    { property: 'og:image:alt', content: `${profile.name}, ${profile.role.toLowerCase()}` },
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:image', content: `${siteUrl}/og-image.png` },
   ],
 })
 
-const route = useRoute()
+useSeo({
+  description: `Portafolio de ${profile.name}, ${profile.role.toLowerCase()} con JavaScript y Vue 3.`,
+})
 
 // The route is already the destination when the old view starts leaving.
 function onLeave(el: Element, done: () => void) {
