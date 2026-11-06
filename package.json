@@ -72,6 +72,14 @@
   },
   "description": "Portafolio personal de Juan Escobar, desarrollador web",
   "author": "Juan A. Escobar <scobjuan@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scobjuan/portfolio.git"
+  },
+  "bugs": {
+    "url": "https://github.com/scobjuan/portfolio/issues"
+  },
+  "homepage": "https://github.com/scobjuan/portfolio#readme",
   "license": "UNLICENSED",
   "packageManager": "pnpm@12.16.1",
   "lint-staged": {
