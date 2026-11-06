@@ -35,6 +35,11 @@ const sectionRoutes: RouteRecordRaw[] = SECTIONS.map(({ id, path }) => ({
 export const routes: RouteRecordRaw[] = [
   ...sectionRoutes,
   {
+    path: '/proyectos/:slug',
+    name: 'project',
+    component: () => import('@/views/ProjectView.vue'),
+  },
+  {
     path: '/:pathMatch(.*)*',
     name: 'not-found',
     component: () => import('@/views/NotFoundView.vue'),
