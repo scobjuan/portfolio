@@ -70,7 +70,7 @@ Visual reference: `docs/design/` (static HTML mockups of every section, the mobi
   - PATCH: fixes, performance and visual tweaks (`fix`, `perf`, `style`).
   - During development use `0.y.z`: every closed phase bumps the minor. `1.0.0` is the first public deployment with real content.
 - One commit per logical unit of work; one release (`pnpm release`) when a phase closes.
-- Do not create a remote or push unless explicitly asked.
+- The remote is `origin`, the private GitHub repository `scobjuan/portfolio`, over HTTPS using the GitHub CLI as a repository-local credential helper (no SSH key is registered for it). Do not push unless explicitly asked.
 
 ## Documentation
 
