@@ -1,10 +1,16 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
+import { useRoute } from 'vue-router'
 import { SECTIONS } from '@/router/routes'
 import { activeSection } from '@/composables/useSectionTheme'
 import { useMenu } from '@/composables/useMenu'
 
 const menu = useMenu()
+const route = useRoute()
+
+/** A section is highlighted when scrolled to, or when a child page of it is open. */
+const isActive = (id: string) =>
+  route.meta.parentSection ? route.meta.parentSection === id : activeSection.value === id
 const toggle = ref<HTMLButtonElement | null>(null)
 const navSections = SECTIONS.filter((section) => section.id !== 'home')
 
@@ -23,8 +29,8 @@ onMounted(() => menu.registerTrigger(toggle.value))
         :key="section.id"
         :to="section.path"
         class="header__link"
-        :aria-current="activeSection === section.id ? 'true' : undefined"
-        :class="{ 'is-active': activeSection === section.id }"
+        :aria-current="isActive(section.id) ? 'true' : undefined"
+        :class="{ 'is-active': isActive(section.id) }"
       >
         <span class="header__index">{{ String(index + 1).padStart(2, '0') }}</span>
         {{ section.label }}

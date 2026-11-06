@@ -16,6 +16,18 @@ export const SECTIONS = [
 
 export type Section = (typeof SECTIONS)[number]
 export type SectionId = Section['id']
+export type ThemeId = Section['theme']
+
+declare module 'vue-router' {
+  interface RouteMeta {
+    /** Home page section this route scrolls to. */
+    section?: SectionId
+    /** Page atmosphere for routes that are not home sections. */
+    theme?: ThemeId
+    /** Section highlighted in the header while this route is open. */
+    parentSection?: SectionId
+  }
+}
 
 export function getSection(id: string): Section | undefined {
   return SECTIONS.find((section) => section.id === id)
@@ -35,9 +47,16 @@ const sectionRoutes: RouteRecordRaw[] = SECTIONS.map(({ id, path }) => ({
 export const routes: RouteRecordRaw[] = [
   ...sectionRoutes,
   {
+    path: '/archivo',
+    name: 'archive',
+    component: () => import('@/views/ArchiveView.vue'),
+    meta: { theme: 'graphite', parentSection: 'projects' },
+  },
+  {
     path: '/proyectos/:slug',
     name: 'project',
     component: () => import('@/views/ProjectView.vue'),
+    meta: { theme: 'bone', parentSection: 'projects' },
   },
   {
     path: '/:pathMatch(.*)*',
