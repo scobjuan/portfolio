@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.5.0](https://github.com/scobjuan/portfolio/compare/v0.4.0...v0.5.0) (2026-11-06)
+
+### Features
+
+* **layout:** hide the header while scrolling down ([48d2c74](https://github.com/scobjuan/portfolio/commit/48d2c74229d64e42bdebd0c863ee5fe7053d88b1))
+* **projects:** show cards with thumbnails and scrolling filters on mobile ([296c95e](https://github.com/scobjuan/portfolio/commit/296c95e40aa6d1a29a108c24e0db9925049ef5aa))
+* **seo:** add page metadata, sitemap, robots and icons ([e12a66e](https://github.com/scobjuan/portfolio/commit/e12a66eda0856129760938b5cb552846e197a87a))
+
+### Bug Fixes
+
+* **layout:** fit the mobile menu and contact section to the screen ([5900411](https://github.com/scobjuan/portfolio/commit/5900411001ae36b6d8a92d00b4b8e8a8eec93a96))
+
+### Documentation
+
+* close phase 4 in AGENTS.md and document configuration ([3aa4fbe](https://github.com/scobjuan/portfolio/commit/3aa4fbed5d7288a91608a46e0bd1722f0889f399))
+
 ## [0.4.0](https://github.com/scobjuan/portfolio/compare/v0.3.0...v0.4.0) (2026-11-06)
 
 ### Features
