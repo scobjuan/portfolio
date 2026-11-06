@@ -21,6 +21,8 @@ export function initLenis(): Lenis | null {
   gsap.ticker.lagSmoothing(0)
 
   if (locks > 0) lenis.stop()
+  // Webfonts change layout; recompute scroll triggers once they are in.
+  document.fonts?.ready.then(() => ScrollTrigger.refresh())
   return lenis
 }
 
