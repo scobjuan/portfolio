@@ -244,6 +244,15 @@ useMotion(root, ({ motion }) => {
     padding-inline: 20px;
   }
 
+  .contact__top {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .contact__title {
+    font-size: 9.2vw;
+  }
+
   .contact__cta {
     width: 130px;
     height: 130px;

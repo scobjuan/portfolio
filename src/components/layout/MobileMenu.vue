@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
+import { profile } from '@/content/profile'
 import { SECTIONS } from '@/router/routes'
 import { lockScroll, unlockScroll } from '@/composables/useLenis'
 import { activeSection } from '@/composables/useSectionTheme'
@@ -94,7 +95,7 @@ onBeforeUnmount(() => {
     </nav>
 
     <div class="menu__footer">
-      <a class="menu__mail" href="mailto:hola@tudominio.com">[hola@tudominio.com]</a>
+      <a class="menu__mail" :href="`mailto:${profile.email}`">{{ profile.email }}</a>
     </div>
   </div>
 </template>
@@ -159,7 +160,7 @@ onBeforeUnmount(() => {
 .menu__label {
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: 46px;
+  font-size: clamp(30px, 10vw, 46px);
   line-height: 76px;
   letter-spacing: -0.04em;
   text-transform: uppercase;
@@ -175,7 +176,9 @@ onBeforeUnmount(() => {
   min-height: 44px;
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 22px;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  font-size: clamp(16px, 5vw, 22px);
   color: inherit;
   border-bottom: 2px solid var(--color-ink);
 }
