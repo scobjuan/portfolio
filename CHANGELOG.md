@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.6.0](https://github.com/scobjuan/portfolio/compare/v0.5.0...v0.6.0) (2026-11-07)
+
+### Features
+
+* **projects:** add OGL distortion to the project preview ([af9d134](https://github.com/scobjuan/portfolio/commit/af9d134506b9d1897b3254f624e87828cbabf038))
+* **skills:** add matter.js physics with drag and throw for the pill pile ([c25e185](https://github.com/scobjuan/portfolio/commit/c25e18568b26ee7b3487504db3dd26af4900727d))
+
+### Documentation
+
+* close phase 5 in AGENTS.md ([66c8a02](https://github.com/scobjuan/portfolio/commit/66c8a027a2768ef823cf1cae68fa4b1c156ea8a8))
+
 ## [0.5.0](https://github.com/scobjuan/portfolio/compare/v0.4.0...v0.5.0) (2026-11-06)
 
 ### Features
