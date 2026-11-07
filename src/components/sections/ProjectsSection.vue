@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import ProjectFilters from '@/components/ui/ProjectFilters.vue'
 import ProjectList from '@/components/ui/ProjectList.vue'
 import SectionLabel from '@/components/ui/SectionLabel.vue'
 import { featuredProjects, projects } from '@/content/projects'
 import type { ProjectCategory } from '@/content/types'
 import { EASE_OUT, useMotion } from '@/composables/useMotion'
+import type { PreviewGL } from '@/effects/projectPreviewGL'
 
 const root = ref<HTMLElement | null>(null)
 const preview = ref<HTMLElement | null>(null)
@@ -32,16 +34,58 @@ useMotion(root, ({ motion, fine }) => {
   const tilt = gsap.quickTo(box, 'rotation', { duration: 0.5, ease: 'power3.out' })
   let lastX = 0
 
+  // WebGL distortion: a separate chunk, fetched when the section is reached. If it
+  // fails or WebGL is missing, the CSS placeholder stays.
+  let gl: PreviewGL | undefined
+  let hovering = false
+  let alive = true
+  const syncGl = () => {
+    gl?.setActive(hovering)
+    const project = activeProject.value
+    if (gl && project) gl.setProject(project)
+  }
+  const stopWatch = watch(activeProject, syncGl)
+  ScrollTrigger.create({
+    trigger: section,
+    start: 'top 80%',
+    once: true,
+    onEnter: () => {
+      import('@/effects/projectPreviewGL')
+        .then(({ mountProjectPreviewGL }) => mountProjectPreviewGL(box))
+        .then((instance) => {
+          if (!alive) return instance.destroy()
+          gl = instance
+          box.classList.add('has-webgl')
+          syncGl()
+        })
+        .catch(() => undefined)
+    },
+  })
+
   const onMove = (event: PointerEvent) => {
     moveX(event.clientX + 40)
     moveY(event.clientY)
-    tilt(gsap.utils.clamp(-6, 6, (event.clientX - lastX) * 0.4))
+    const speed = event.clientX - lastX
+    tilt(gsap.utils.clamp(-6, 6, speed * 0.4))
+    gl?.setVelocity(Math.hypot(speed, event.movementY))
     lastX = event.clientX
   }
-  const show = () =>
+  const show = () => {
+    hovering = true
+    gl?.setActive(true)
     gsap.to(box, { autoAlpha: 1, clipPath: 'inset(0% 0% 0% 0%)', duration: 0.5, ease: EASE_OUT })
+  }
   const hide = () => {
-    gsap.to(box, { autoAlpha: 0, clipPath: 'inset(0% 0% 100% 0%)', duration: 0.4, ease: EASE_OUT })
+    hovering = false
+    gsap.to(box, {
+      autoAlpha: 0,
+      clipPath: 'inset(0% 0% 100% 0%)',
+      duration: 0.4,
+      ease: EASE_OUT,
+      onComplete: () => {
+        if (!hovering) gl?.setActive(false)
+      },
+    })
     activeSlug.value = null
   }
 
@@ -50,6 +94,10 @@ useMotion(root, ({ motion, fine }) => {
   list?.addEventListener('pointerenter', show)
   list?.addEventListener('pointerleave', hide)
   return () => {
+    alive = false
+    stopWatch()
+    gl?.destroy()
+    box.classList.remove('has-webgl')
     list?.removeEventListener('pointermove', onMove as EventListener)
     list?.removeEventListener('pointerenter', show)
     list?.removeEventListener('pointerleave', hide)
@@ -169,6 +217,21 @@ useMotion(root, ({ motion, fine }) => {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   pointer-events: none;
+  visibility: hidden;
+  overflow: hidden;
+}
+
+/* The WebGL canvas covers the CSS placeholder once it is ready. */
+.preview :deep(.preview__canvas) {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+}
+
+.preview.has-webgl .preview__label,
+.preview.has-webgl .preview__name {
   visibility: hidden;
 }
 
