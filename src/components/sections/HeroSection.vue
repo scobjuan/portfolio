@@ -4,10 +4,12 @@ import gsap from 'gsap'
 import { SplitText } from 'gsap/SplitText'
 import MarqueeStrip from '@/components/ui/MarqueeStrip.vue'
 import { profile } from '@/content/profile'
+import { highlightSegments } from '@/utils/highlight'
 import { onPageReady } from '@/composables/usePageTransition'
 import { EASE_OUT, useMotion } from '@/composables/useMotion'
 
 const root = ref<HTMLElement | null>(null)
+const taglineParts = highlightSegments(profile.tagline, profile.taglineHighlights)
 const title = ref<HTMLElement | null>(null)
 const orb = ref<HTMLElement | null>(null)
 const time = ref('')
@@ -177,8 +179,10 @@ useMotion(root, ({ motion, fine }, ctx) => {
         <div class="hero__info" data-hero-fade>
           <span class="hero__eyebrow">(Rol)</span>
           <p class="hero__role">
-            {{ profile.role }}. Construyo interfaces vivas con
-            <span class="hero__accent">JavaScript</span> y <span class="hero__accent">Vue 3</span>.
+            <template v-for="(part, index) in taglineParts" :key="index"
+              ><span v-if="part.highlight" class="hero__accent">{{ part.text }}</span
+              ><template v-else>{{ part.text }}</template></template
+            >
           </p>
         </div>
         <div class="hero__place" data-hero-fade>
@@ -283,6 +287,11 @@ useMotion(root, ({ motion, fine }, ctx) => {
 }
 
 .hero__eyebrow,
+.hero__accent {
+  color: var(--accent);
+  white-space: nowrap;
+}
+
 .hero__place {
   color: var(--color-ash);
 }
@@ -290,10 +299,6 @@ useMotion(root, ({ motion, fine }, ctx) => {
 .hero__role {
   font-size: 20px;
   line-height: 1.35;
-}
-
-.hero__accent {
-  color: var(--accent);
 }
 
 .hero__place {

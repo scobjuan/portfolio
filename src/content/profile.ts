@@ -11,6 +11,7 @@ export const profile: Profile = {
   lastName: 'Escobar',
   role: 'Desarrollador web',
   tagline: 'Construyo interfaces vivas con JavaScript y Vue 3.',
+  taglineHighlights: ['JavaScript', 'Vue 3'],
   location: 'Medellín, Colombia',
   timeZone: 'America/Bogota',
   email: 'hola@juanescobar.example.com',

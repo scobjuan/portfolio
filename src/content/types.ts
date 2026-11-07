@@ -62,6 +62,8 @@ export interface Profile {
   lastName: string
   role: string
   tagline: string
+  /** Terms inside `tagline` drawn in the accent color. */
+  taglineHighlights: string[]
   location: string
   /** IANA time zone used for the live local-time label. */
   timeZone: string
