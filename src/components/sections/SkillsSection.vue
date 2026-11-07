@@ -9,6 +9,7 @@ import { useMotion } from '@/composables/useMotion'
 import { scrambleFrame, scrambleText } from '@/utils/text-effects'
 
 const root = ref<HTMLElement | null>(null)
+const pile = ref<HTMLElement | null>(null)
 const heading = ref<HTMLElement | null>(null)
 const active = ref<SkillCategoryId>('frontend')
 
@@ -16,7 +17,7 @@ const countFor = (id: SkillCategoryId) => skills.filter((skill) => skill.categor
 // A fixed tilt per pill keeps the pile looking loose without random re-renders.
 const tilt = (index: number) => `${[-3, 4, -7, 2, 8, -5, 3, -9][index % 8]}deg`
 
-useMotion(root, ({ motion }) => {
+useMotion(root, ({ motion, fine }) => {
   const section = root.value
   const title = heading.value
   if (!motion || !section || !title) return
@@ -29,12 +30,32 @@ useMotion(root, ({ motion }) => {
   const pills = gsap.utils.toArray<HTMLElement>('.pill', section)
   gsap.set(pills, { opacity: 0 })
 
+  // Mouse users get the physics pile (drag and throw); everyone else gets the
+  // plain drop-in. The simulation is a separate chunk, fetched when the section is reached.
+  let physics = false
+  let stopPhysics: (() => void) | undefined
+  const container = pile.value
+
   ScrollTrigger.create({
     trigger: section,
     start: 'top 55%',
     once: true,
     onEnter: () => {
       scrambleText(title, finalText, 1.1)
+
+      if (fine && container) {
+        physics = true
+        import('@/effects/skillsPhysics')
+          .then(({ mountSkillsPhysics }) => mountSkillsPhysics(container, pills))
+          .then((destroy) => {
+            // The context may have been reverted while the chunk was loading.
+            if (physics) stopPhysics = destroy
+            else destroy()
+          })
+          .catch(() => gsap.set(pills, { opacity: 1 }))
+        return
+      }
+
       gsap.fromTo(
         pills,
         { yPercent: -400, opacity: 0 },
@@ -42,6 +63,11 @@ useMotion(root, ({ motion }) => {
       )
     },
   })
+
+  return () => {
+    physics = false
+    stopPhysics?.()
+  }
 })
 </script>
 
@@ -69,7 +95,7 @@ useMotion(root, ({ motion }) => {
       </div>
     </div>
 
-    <ul class="skills__pile">
+    <ul ref="pile" class="skills__pile" data-cursor="project" data-cursor-label="Arrastra">
       <li
         v-for="(skill, index) in skills"
         :key="skill.name"
@@ -204,6 +230,33 @@ useMotion(root, ({ motion }) => {
 .pill.is-solid {
   background: var(--fg);
   color: var(--bg);
+}
+
+/*
+ * Reserve the pile's height up front for mouse users, so the page does not change
+ * size (and shift the sections below) when the physics chunk finishes loading.
+ */
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .skills__pile {
+    min-height: 560px;
+  }
+}
+
+/* Physics mode: pills leave the flow and are positioned by matter.js. */
+.skills__pile.is-physics {
+  display: block;
+  overflow: clip;
+  overflow-clip-margin: 12px;
+  user-select: none;
+}
+
+.skills__pile.is-physics .pill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  rotate: none;
+  white-space: nowrap;
+  will-change: transform;
 }
 
 @media (max-width: 960px) {
